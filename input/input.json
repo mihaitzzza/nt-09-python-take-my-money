@@ -1,0 +1,52 @@
+[
+  {
+    "name": "jeans",
+    "normal price": "50",
+    "price": "40",
+    "color": "green",
+    "size": "XL",
+    "gender": "M",
+    "quantity": "20000",
+    "sales": "150"
+  },
+  {
+    "name": "t-shirt",
+    "normal price": "70",
+    "price": "70",
+    "color": "green",
+    "size": "XXL",
+    "gender": "M",
+    "quantity": "20000",
+    "sales": "1500"
+  },
+  {
+    "name": "t-shirt",
+    "normal price": "50",
+    "price": "40",
+    "color": "red",
+    "size": "S",
+    "gender": "F",
+    "quantity": "120000",
+    "sales": "15000"
+  },
+  {
+    "name": "t-shirt",
+    "normal price": "150",
+    "price": "140",
+    "color": "blue",
+    "size": "S",
+    "gender": "F",
+    "quantity": "50000",
+    "sales": "4000"
+  },
+  {
+    "name": "t-shirt",
+    "normal price": "50",
+    "price": "40",
+    "color": "green",
+    "size": "M",
+    "gender": "M",
+    "quantity": "20000",
+    "sales": "150"
+  }
+]
