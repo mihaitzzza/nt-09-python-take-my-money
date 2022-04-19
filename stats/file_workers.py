@@ -8,22 +8,21 @@ from pathlib import Path
 class FileWorker:
     output_directory = 'output'
 
-    def __init__(self, output_type, output_file_name):
+    def __init__(self, output_type):
         self.output_directory_path = os.path.join(FileWorker.output_directory, output_type)
-        self.output_file_path = os.path.join(self.output_directory_path, output_file_name)
 
     @abstractmethod
     def read(self):
         pass
 
     @abstractmethod
-    def write(self, data):
+    def write(self, file_name, data):
         pass
 
 
 class CSVWorker(FileWorker):
     def __init__(self):
-        super().__init__('csv', 'all.csv')
+        super().__init__('csv')
 
         self.input_file_path = os.path.join('input/input.csv')
 
@@ -41,16 +40,17 @@ class CSVWorker(FileWorker):
 
         return results
 
-    def write(self, data):  # data here is a list of dicts: [{}, {}]
+    def write(self, file_name, data):  # data here is a list of dicts: [{}, {}]
         Path(self.output_directory_path).mkdir(parents=True, exist_ok=True)
+        file_path = os.path.join(self.output_directory_path, f'{file_name}.csv')
 
         if len(data) == 0:
-            open(self.output_file_path, 'w').close()
+            open(file_path, 'w').close()
         else:
             keys = data[0].keys()
             data_from_list = [item.values() for item in data]
 
-            with open(self.output_file_path, 'w') as csv_file:
+            with open(file_path, 'w') as csv_file:
                 writer = csv.writer(csv_file)
                 writer.writerow(keys)
                 writer.writerows(data_from_list)
@@ -58,7 +58,7 @@ class CSVWorker(FileWorker):
 
 class JSONWorker(FileWorker):
     def __init__(self):
-        super().__init__('json', 'all.json')
+        super().__init__('json')
 
         self.input_file_path = os.path.join('input/input.json')
 
@@ -68,5 +68,12 @@ class JSONWorker(FileWorker):
 
         return products
 
-    def write(self, data):
-        pass
+    def write(self, file_name, data):  # data here is a list of dicts: [{}, {}]
+        Path(self.output_directory_path).mkdir(parents=True, exist_ok=True)
+        file_path = os.path.join(self.output_directory_path, f'{file_name}.json')
+
+        if len(data) == 0:
+            open(file_path, 'w').close()
+        else:
+            with open(file_path, 'w') as json_file:
+                json.dump(data, json_file, indent=2)

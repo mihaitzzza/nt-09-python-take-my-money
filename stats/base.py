@@ -32,10 +32,10 @@ class Stats:
         products = self.input_file_worker.read()
 
         # Step 2. Do some magic
-        unique_colors = set([product['color'] for product in products])
         products_by_color = defaultdict(list)
         for product in products:
             products_by_color[product['color']].append(product)
 
         # Step 3. Write to output file
-        self.output_file_worker.write(products)
+        for color, products in products_by_color.items():
+            self.output_file_worker.write(color, products)
